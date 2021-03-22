@@ -75,7 +75,7 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
         Paint(),
       );
 
-      _clipToBorder(canvasWrapper, holder);
+      clipToBorder(canvasWrapper, holder);
     }
 
     super.paint(canvasWrapper, holder);
@@ -140,7 +140,8 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
     }
   }
 
-  void _clipToBorder(CanvasWrapper canvasWrapper, PaintHolder<LineChartData> holder) {
+  @visibleForTesting
+  void clipToBorder(CanvasWrapper canvasWrapper, PaintHolder<LineChartData> holder) {
     final data = holder.data;
     final size = canvasWrapper.size;
     final clip = data.clipData;
