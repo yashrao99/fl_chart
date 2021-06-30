@@ -787,6 +787,49 @@ abstract class FlDotPainter with EquatableMixin {
   Size getSize(FlSpot spot);
 }
 
+class FLDotImagePainter extends FlDotPainter {
+  /// The fill color to use for the circle
+  Color color;
+
+  /// Customizes the radius of the circle
+  double radius;
+
+  /// The image we are providing to the painter
+  Image image;
+
+  /// The color of the circle is determined determined by [color],
+  /// [radius] determines the radius of the circle.
+  /// You can have a stroke line around the circle,
+  /// by setting the thickness with [strokeWidth],
+  /// and you can change the color of of the stroke with [strokeColor].
+  FLDotImagePainter({
+    Color? color,
+    double? radius,
+    // Color? strokeColor,
+    // double? strokeWidth,
+    required this.image,
+  })   : color = color ?? Colors.green,
+        radius = radius ?? 4.0;
+  @override
+  void draw(Canvas canvas, FlSpot spot, Offset offsetInCanvas) {
+    canvas.drawImage(
+        image,
+        offsetInCanvas,
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.fill);
+  }
+
+  /// Implementation of the parent class to get the size of the circle
+  @override
+  Size getSize(FlSpot spot) {
+    return Size(radius * 2, radius * 2);
+  }
+
+  @override
+  List<Object?> get props => [color, radius, image];
+}
+
 /// This class is an implementation of a [FlDotPainter] that draws
 /// a circled shape
 class FlDotCirclePainter extends FlDotPainter {
